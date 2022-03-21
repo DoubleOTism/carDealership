@@ -11,20 +11,20 @@ public class CarDealership {
     public static void main(String[] args) throws Exception {
         
         ArrayList<Car> cars = new ArrayList<>();
-        Car newCar = new Car("8P29918", "Renault", "MeganeII", 2007, 56000, 65000.00F);
+        Car newCar = new Car("8P29918", "Renault", "Megane_II", 2007, 118960, 65000.00F);
         cars.add(newCar);
-        cars.add( new Car("6P27745", "Škoda", "Octavia", 2000, 5000, 20000.00F) );
+        cars.add( new Car("6P27745", "Škoda", "Octavia", 2000, 356421, 20000.00F) );
         
         new FileOutputStream("seznamAut.txt", true).close();
         int menuOption = 0;
-        System.out.println("Výtejte v databázi aut! Vyberte si z následujících možností (0 pro hlavní menu)");
+        System.out.println("Výtejte v databázi aut! Vyberte si z následujících možností (0 pro výpis funkcí)");
         displayMenu();
         do {
-            System.out.println("\n\nVyberte si z následujících možností (0 pro hlavní menu)");
+            System.out.println("\n\nVyberte si z následujících možností (0 pro výpis funkcí)");
             menuOption = sc.nextInt();
             while(menuOption <0 || menuOption >6)
             {
-                System.out.println("Vyberte, prosím, správnou volbu (0 pro hlavní menu)");
+                System.out.println("Špatně, zadejte číslici 0-6 pro volbu (0 pro výpis funkcí)");
                 menuOption = sc.nextInt();
             }
             doMenuOption(menuOption,cars);
@@ -86,7 +86,7 @@ public class CarDealership {
                 displayCars(cars);
                 break;
             case 2:
-                System.out.println("Přidat nové auto do databáze.");
+                System.out.println("Přidat auto do databáze.");
                 addNewCar(cars);
                 break;
             case 3:
@@ -118,7 +118,7 @@ public class CarDealership {
         float price = 0.0F;
         
         System.out.println("Zadejte nové auto dle tohoto formátu:");
-        System.out.println("SPZ VÝROBCE MODEL ROK KM CENA");
+        System.out.println("SPZ VÝROBCE MODEL ROK_VÝROBY NAJETÉ_KM CENA");
         System.out.println("Např: 8P29918 Renault Megane 2007 118960 65000");
         do {
             validInput = true;
@@ -136,10 +136,10 @@ public class CarDealership {
             else validInput = false;
             if(!validInput)
             {
-                System.out.println("\nNebylo zadáno dle formátu!");
+                System.out.println("\nNebylo zadáno dle potřebného formátu!");
                 System.out.println("Zadejte nové auto dle tohoto formátu:");
-                System.out.println("SPZ VÝROBCE MODEL ROK KM CENA");
-                System.out.println("Např: 8P29918 Renault Megane 2007 118960 65000\n");
+                System.out.println("SPZ VÝROBCE MODEL ROK_VÝROBY NAJETÉ_KM CENA");
+                System.out.println("Např: 8P29118 Renault Megane_II 2007 118960 65000\n");
             }
         } while(validInput == false);
         cars.add(new Car(VIN,make,model,year,mileage,price));
@@ -193,7 +193,7 @@ public class CarDealership {
     {
         float priceMin = 0, priceMax = 0;
         do {
-            if(priceMin > priceMax) System.out.println("Minimální cena je vyšší než maximální cena");
+            if(priceMin > priceMax) System.out.println("Minimální cena je vyšší než maximální cena!");
             System.out.print("Napište minimální cenu v Kč: ");
             while(!sc.hasNextFloat())
             {
@@ -205,7 +205,7 @@ public class CarDealership {
             System.out.print("Napiště minimální cenu v Kč: ");
             while(!sc.hasNextFloat())
             {
-                System.out.print("špatně, napište minimální cenu v Kč: ");
+                System.out.print("Špatně, napište minimální cenu v Kč: ");
                 sc.next();
             }
             priceMax = sc.nextFloat();
