@@ -11,9 +11,9 @@ public class CarDealership {
     public static void main(String[] args) throws Exception {
         
         ArrayList<Car> cars = new ArrayList<>();
-        Car newCar = new Car("8P29918", "Renault", "Megane_II", 2007, 118960, 65000.00F);
+        Car newCar = new Car("8P29918", "Renault", "Megane_II", 0001, 2007, 118960, 65000.00F);
         cars.add(newCar);
-        cars.add( new Car("6P27745", "Škoda", "Octavia", 2000, 356421, 20000.00F) );
+        cars.add( new Car("6P27745", "Škoda", "Octavia", 0002, 2000, 356421, 20000.00F) );
         
         new FileOutputStream("seznamAut.txt", true).close();
         int menuOption = 0;
@@ -52,28 +52,28 @@ public class CarDealership {
                 System.out.println("6. Opustit program.\n\n");
     }
     public static void displayCars(ArrayList<Car> cars) {
-        String formatter = "| %-2d | %-6s | %-15s | %-15s | %-5d | %-8d Km| %.2f kč |%n";
-        System.out.format("+----+--------+-----------------+-----------------+-------+----------+------------+%n");
-        System.out.printf("| #  | SPZ    | Výrobce         | Model           | Rok   | KM       | Cena       |%n");
-        System.out.format("+----+--------+-----------------+-----------------+-------+----------+------------+%n");
+        String formatter = "| %-2d | %-7s | %-15s | %-8s | %-6s | %-5d | %-8d Km| %.2f Kč |%n";
+        System.out.format("+----+---------+-----------------+-----------+-----------------+-------+----------+------------+%n");
+        System.out.printf("| #  | SPZ     | Výrobce         | Transakce | Model           | Rok   | KM       | Cena       |%n");
+        System.out.format("+----+---------+-----------------+-----------+-----------------+-------+----------+------------+%n");
         int i = 0;
         for (Car car : cars) {
-            System.out.format(formatter,++i,car.getSPZ(),car.getMake(),car.getModel(),car.getYear(),car.getMileage(),car.getPrice());
+            System.out.format(formatter,++i,car.getSPZ(),car.getMake(),car.gettranskace(),car.getModel(),car.getYear(),car.getMileage(),car.getPrice());
         }
         System.out.format("+----+--------+-----------------+-----------------+-------+----------+------------+%n");
     }
     public static void displayCars(Car car) {
-        String formatter = "| %-2d | %-6s | %-15s | %-15s | %-5d | %-8d Km| %.2f Kč |%n";
-        System.out.format("+----+--------+-----------------+-----------------+-------+----------+------------+%n");
-        System.out.printf("| #  | SPZ    | Výrobce         | Model           | Rok   | KM       | Cena       |%n");
-        System.out.format("+----+--------+-----------------+-----------------+-------+----------+------------+%n");
-        System.out.format(formatter,1,car.getSPZ(),car.getMake(),car.getModel(),car.getYear(),car.getMileage(),car.getPrice());
-        System.out.format("+----+--------+-----------------+-----------------+-------+----------+------------+%n");
+        String formatter = "| %-2d | %-7s | %-15s | %-8s | %-6s | %-5d | %-8d Km| %.2f Kč |%n";
+        System.out.format("+----+---------+-----------------+-----------+-----------------+-------+----------+------------+%n");
+        System.out.printf("| #  | SPZ     | Výrobce         | Transakce | Model           | Rok   | KM       | Cena       |%n");
+        System.out.format("+----+---------+-----------------+-----------+-----------------+-------+----------+------------+%n");
+        System.out.format(formatter,1,car.getSPZ(),car.getMake(),car.gettranskace(),car.getModel(),car.getYear(),car.getMileage(),car.getPrice());
+        System.out.format("+----+---------+-----------------+-----------+-----------------+-------+----------+------------+%n");
     }
     public static void doMenuOption(int action, ArrayList<Car> cars) throws Exception {
         String newCar, SPZ, make, model;
         Car foundCar = null;
-        int carNumber = 0, year = 0, mileage = 0;
+        int carNumber = 0, year = 0, mileage = 0, transakce = 0;
         float priceMin = 0.00F, priceMax = 0.00F, price = 0.00F;
         boolean validInput = true;
         switch (action) {
@@ -115,16 +115,20 @@ public class CarDealership {
         boolean validInput;
         String VIN, make, model;
         int mileage = 0, year = 0;
+        int transakce = 0;
         float price = 0.0F;
         
         System.out.println("Zadejte nové auto dle tohoto formátu:");
-        System.out.println("SPZ VÝROBCE MODEL ROK_VÝROBY NAJETÉ_KM CENA");
-        System.out.println("Např: 8P29918 Renault Megane 2007 118960 65000");
+        System.out.println("SPZ VÝROBCE MODEL ČÍSLO_TRANSAKCE ROK_VÝROBY NAJETÉ_KM CENA");
+        System.out.println("Např: 8P29918 Renault Megane 55689 2007 118960 65000");
         do {
             validInput = true;
             VIN = sc.next();
             make = sc.next();
             model = sc.next();
+            if(sc.hasNextInt())
+                transakce = sc.nextInt();
+            else validInput = false;
             if(sc.hasNextInt()) 
                 year = sc.nextInt();
             else validInput = false;
@@ -142,7 +146,7 @@ public class CarDealership {
                 System.out.println("Např: 8P29118 Renault Megane_II 2007 118960 65000\n");
             }
         } while(validInput == false);
-        cars.add(new Car(VIN,make,model,year,mileage,price));
+        cars.add(new Car(VIN,make,model,transakce,year,mileage,price));
         
     }
     
@@ -202,10 +206,10 @@ public class CarDealership {
             }
             priceMin = sc.nextFloat();
 
-            System.out.print("Napiště minimální cenu v Kč: ");
+            System.out.print("Napiště maximální cenu v Kč: ");
             while(!sc.hasNextFloat())
             {
-                System.out.print("Špatně, napište minimální cenu v Kč: ");
+                System.out.print("Špatně, napište maximální cenu v Kč: ");
                 sc.next();
             }
             priceMax = sc.nextFloat();

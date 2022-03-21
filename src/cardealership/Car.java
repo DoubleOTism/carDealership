@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package cardealership;
 
 import java.io.*;
@@ -12,23 +8,26 @@ public class Car implements Serializable{
     String SPZ;
     String výrobce;
     String model;
+    int transakce;
     int rok;
     int km;
     float cena;
     
     Car() {};
-    Car(String SPZ, String výrobce, String model, int rok, int km, float cena) {
+    Car(String SPZ, String výrobce, String model, int transakce, int rok, int km, float cena) {
         this.SPZ = SPZ;
         this.výrobce = výrobce;
         this.model = model;
+        this.transakce = transakce;
         this.rok = rok;
         this.km = km;
         this.cena = cena;
     }
-    public boolean addNewCar(String SPZ, String výrobce, String model, int rok, int km, float cena) {
+    public boolean addNewCar(String SPZ, String výrobce, String model, int transakce, int rok, int km, float cena) {
         this.SPZ = SPZ;
         this.výrobce = výrobce;
         this.model = model;
+        this.transakce = transakce;
         this.rok = rok;
         this.km = rok;
         this.cena = cena;
@@ -46,6 +45,8 @@ public class Car implements Serializable{
     public String getModel() {
         return model;
     }
+
+    public int gettranskace() { return transakce; }
 
     public int getYear() {
         return rok;
