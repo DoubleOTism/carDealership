@@ -52,23 +52,23 @@ public class CarDealership {
                 System.out.println("6. Opustit program.\n\n");
     }
     public static void displayCars(ArrayList<Car> cars) {
-        String formatter = "| %-2d | %-7s | %-15s | %-8s | %-6s | %-5d | %-8d Km| %.2f Kč |%n";
-        System.out.format("+----+---------+-----------------+-----------+-----------------+-------+----------+------------+%n");
-        System.out.printf("| #  | SPZ     | Výrobce         | Transakce | Model           | Rok   | KM       | Cena       |%n");
-        System.out.format("+----+---------+-----------------+-----------+-----------------+-------+----------+------------+%n");
+        String formatter = "| %-2d | %-7s | %-15s | %-9s | %-15s | %-5d | %-8d Km| %.2f Kč |%n";
+        System.out.format("+----+---------+-----------------+-----------+-----------------+-------+------------+-------------+%n");
+        System.out.printf("| #  | SPZ     | Výrobce         | Transakce | Model           | Rok   |     KM     |  Cena       |%n");
+        System.out.format("+----+---------+-----------------+-----------+-----------------+-------+------------+-------------+%n");
         int i = 0;
         for (Car car : cars) {
             System.out.format(formatter,++i,car.getSPZ(),car.getMake(),car.gettranskace(),car.getModel(),car.getYear(),car.getMileage(),car.getPrice());
         }
-        System.out.format("+----+--------+-----------------+-----------------+-------+----------+------------+%n");
+        System.out.format("+----+---------+-----------------+-----------+-----------------+-------+------------+-------------+%n");
     }
     public static void displayCars(Car car) {
-        String formatter = "| %-2d | %-7s | %-15s | %-8s | %-6s | %-5d | %-8d Km| %.2f Kč |%n";
-        System.out.format("+----+---------+-----------------+-----------+-----------------+-------+----------+------------+%n");
-        System.out.printf("| #  | SPZ     | Výrobce         | Transakce | Model           | Rok   | KM       | Cena       |%n");
-        System.out.format("+----+---------+-----------------+-----------+-----------------+-------+----------+------------+%n");
+        String formatter = "| %-2d | %-7s | %-15s | %-9s | %-15s | %-5d | %-8d Km| %.2f Kč |%n";
+        System.out.format("+----+---------+-----------------+-----------+-----------------+-------+------------+-------------+%n");
+        System.out.printf("| #  | SPZ     | Výrobce         | Transakce | Model           | Rok   |     KM     | Cena        |%n");
+        System.out.format("+----+---------+-----------------+-----------+-----------------+-------+------------+-------------+%n");
         System.out.format(formatter,1,car.getSPZ(),car.getMake(),car.gettranskace(),car.getModel(),car.getYear(),car.getMileage(),car.getPrice());
-        System.out.format("+----+---------+-----------------+-----------+-----------------+-------+----------+------------+%n");
+        System.out.format("+----+---------+-----------------+-----------+-----------------+-------+------------+-------------+%n");
     }
     public static void doMenuOption(int action, ArrayList<Car> cars) throws Exception {
         String newCar, SPZ, make, model;
